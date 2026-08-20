@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { Client, GatewayIntentBits, Collection, Events } = require('discord.js');
+const { Client, GatewayIntentBits, Collection, Events, REST, Routes } = require('discord.js');
 const config = require('./config');
 const minecraftManager = require('./minecraftManager');
 const relayState = require('./relayState');
@@ -20,8 +20,24 @@ for (const file of fs.readdirSync(commandsPath).filter((f) => f.endsWith('.js'))
   client.commands.set(command.data.name, command);
 }
 
-client.once(Events.ClientReady, (c) => {
+async function registerSlashCommands() {
+  const rest = new REST().setToken(config.discord.token);
+  const body = client.commands.map((command) => command.data.toJSON());
+  const route = config.discord.guildId
+    ? Routes.applicationGuildCommands(config.discord.clientId, config.discord.guildId)
+    : Routes.applicationCommands(config.discord.clientId);
+
+  const data = await rest.put(route, { body });
+  console.log(`Registered ${data.length} slash command(s)${config.discord.guildId ? ' for the guild' : ' globally'}.`);
+}
+
+client.once(Events.ClientReady, async (c) => {
   console.log(`Discord bot logged in as ${c.user.tag}`);
+  try {
+    await registerSlashCommands();
+  } catch (err) {
+    console.error('Failed to register slash commands:', err);
+  }
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
