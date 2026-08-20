@@ -13,6 +13,7 @@ Built with [discord.js](https://discord.js.org/) and [mineflayer](https://github
 - `/mc-pay <player> <amount>` — sends `/pay <player> <amount>` in-game.
 - `/mc-relay on|off` — mirrors chat between a designated Discord channel and in-game chat.
 - `/mc-autosell start|stop|once [interval_seconds]` — repeatedly sends the sell command (`MC_SELL_COMMAND`, default `/sell all`) in-game so it keeps selling whatever's in the inventory. `start` sells immediately then repeats on the given interval (default `MC_AUTOSELL_INTERVAL_SECONDS`, 300s); `once` sells a single time; `stop` cancels the loop. Autosell automatically stops if the bot disconnects.
+- `/mc-stats` — generates a custom stats card image (skin avatar, health/food bars, XP level, gamemode, dimension, position, players online, ping) and posts it in Discord. There's no real in-game screenshot to take — mineflayer is a headless protocol client with no renderer — so this draws the card itself from live bot state instead.
 
 `/mc-connect`, `/mc-disconnect`, `/mc-say`, `/mc-pay`, `/mc-relay`, and `/mc-autosell` are restricted to admins: either the Discord user IDs listed in `ADMIN_USER_IDS`, or anyone with "Manage Server" if that variable is left blank.
 
@@ -47,7 +48,7 @@ The bot auto-reconnects after an unexpected disconnect (kick, network drop) unle
 
 ## A note on server rules
 
-Automating gameplay (AFK bots, farming bots, always-on presence, etc.) is against the rules on many Minecraft servers, and donutsmp.net's terms may restrict it too. This project only handles authentication, connection, chat relay, and basic status — it does not do anything on your behalf in-game (no pathfinding, farming, combat, etc.). Check donutsmp.net's rules before running any bot on your account, and use this at your own risk.
+Check donutsmp.net's current rules before running any automation on your account (this project sends chat commands like `/sell all` and `/pay` on your behalf via `/mc-autosell`, in addition to login/chat/status) — use this at your own risk.
 
 ## Project structure
 
@@ -63,8 +64,13 @@ src/
     connect.js
     disconnect.js
     status.js
+    stats.js
     say.js
     pay.js
     relay.js
     autosell.js
 ```
+
+## Requirements
+
+Node.js 18+ (uses the global `fetch` API to pull the player's skin avatar for `/mc-stats`).

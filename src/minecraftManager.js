@@ -124,6 +124,10 @@ class MinecraftManager extends EventEmitter {
     this.spawnedAt = null;
   }
 
+  getBot() {
+    return this.isConnected() ? this.bot : null;
+  }
+
   sendChat(message) {
     if (!this.isConnected() || !this.bot) {
       throw new Error('Not connected to the Minecraft server.');
