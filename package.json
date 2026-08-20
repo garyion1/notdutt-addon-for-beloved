@@ -2,11 +2,11 @@
   "name": "donutsmp-discord-bot",
   "version": "1.0.0",
   "description": "Discord bot that logs a Minecraft account into donutsmp.net and controls it via Discord commands.",
-  "main": "src/index.js",
+  "main": "index.js",
   "type": "commonjs",
   "private": true,
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node index.js",
     "deploy-commands": "node src/deploy-commands.js",
     "postinstall": "node scripts/prune-minecraft-data.js"
   },
