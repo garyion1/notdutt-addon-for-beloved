@@ -11,8 +11,9 @@ Built with [discord.js](https://discord.js.org/) and [mineflayer](https://github
 - `/mc-status` — health, food, position, uptime.
 - `/mc-say <message>` — sends a chat message in-game.
 - `/mc-relay on|off` — mirrors chat between a designated Discord channel and in-game chat.
+- `/mc-autosell start|stop|once [interval_seconds]` — repeatedly sends the sell command (`MC_SELL_COMMAND`, default `/sell all`) in-game so it keeps selling whatever's in the inventory. `start` sells immediately then repeats on the given interval (default `MC_AUTOSELL_INTERVAL_SECONDS`, 300s); `once` sells a single time; `stop` cancels the loop. Autosell automatically stops if the bot disconnects.
 
-`/mc-connect`, `/mc-disconnect`, `/mc-say`, and `/mc-relay` are restricted to admins: either the Discord user IDs listed in `ADMIN_USER_IDS`, or anyone with "Manage Server" if that variable is left blank.
+`/mc-connect`, `/mc-disconnect`, `/mc-say`, `/mc-relay`, and `/mc-autosell` are restricted to admins: either the Discord user IDs listed in `ADMIN_USER_IDS`, or anyone with "Manage Server" if that variable is left blank.
 
 The bot auto-reconnects after an unexpected disconnect (kick, network drop) unless you disconnected it manually, controlled by `AUTO_RECONNECT`.
 
@@ -63,4 +64,5 @@ src/
     status.js
     say.js
     relay.js
+    autosell.js
 ```

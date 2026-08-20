@@ -33,6 +33,10 @@ module.exports = {
         {
           name: 'Position',
           value: summary.position ? `${summary.position.x}, ${summary.position.y}, ${summary.position.z}` : 'unknown',
+        },
+        {
+          name: 'Autosell',
+          value: summary.autoselling ? `on (every ${Math.round(summary.autosellIntervalMs / 1000)}s)` : 'off',
         }
       )
       .setColor(0x2ecc71);

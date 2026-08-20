@@ -25,6 +25,8 @@ const config = {
     username: required('MC_USERNAME'),
     version: process.env.MC_VERSION || false,
     autoReconnect: (process.env.AUTO_RECONNECT || 'true').toLowerCase() !== 'false',
+    sellCommand: process.env.MC_SELL_COMMAND || '/sell all',
+    autosellIntervalSeconds: Number(process.env.MC_AUTOSELL_INTERVAL_SECONDS || 300),
   },
 };
 

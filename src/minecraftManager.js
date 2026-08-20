@@ -13,6 +13,8 @@ class MinecraftManager extends EventEmitter {
     this.manualDisconnect = false;
     this.reconnectTimer = null;
     this.spawnedAt = null;
+    this.autosellTimer = null;
+    this.autosellIntervalMs = null;
   }
 
   isConnected() {
@@ -82,6 +84,7 @@ class MinecraftManager extends EventEmitter {
         this.status = 'disconnected';
         this.bot = null;
         this.spawnedAt = null;
+        this.stopAutosell();
         this.emit('end', reason);
 
         if (!settled) {
@@ -112,6 +115,7 @@ class MinecraftManager extends EventEmitter {
       clearTimeout(this.reconnectTimer);
       this.reconnectTimer = null;
     }
+    this.stopAutosell();
     if (this.bot) {
       this.bot.quit();
     }
@@ -125,6 +129,40 @@ class MinecraftManager extends EventEmitter {
       throw new Error('Not connected to the Minecraft server.');
     }
     this.bot.chat(message);
+  }
+
+  isAutoselling() {
+    return this.autosellTimer !== null;
+  }
+
+  startAutosell(intervalSeconds = config.minecraft.autosellIntervalSeconds) {
+    if (!this.isConnected()) {
+      throw new Error('Not connected to the Minecraft server.');
+    }
+    this.stopAutosell();
+    this.autosellIntervalMs = Math.max(5, intervalSeconds) * 1000;
+    this.sendChat(config.minecraft.sellCommand);
+    this.emit('autosell', config.minecraft.sellCommand);
+    this.autosellTimer = setInterval(() => {
+      if (!this.isConnected()) {
+        this.stopAutosell();
+        return;
+      }
+      try {
+        this.sendChat(config.minecraft.sellCommand);
+        this.emit('autosell', config.minecraft.sellCommand);
+      } catch (err) {
+        this.emit('error', err);
+      }
+    }, this.autosellIntervalMs);
+  }
+
+  stopAutosell() {
+    if (this.autosellTimer) {
+      clearInterval(this.autosellTimer);
+      this.autosellTimer = null;
+      this.autosellIntervalMs = null;
+    }
   }
 
   getStatusSummary() {
@@ -142,6 +180,8 @@ class MinecraftManager extends EventEmitter {
         ? { x: Math.round(position.x), y: Math.round(position.y), z: Math.round(position.z) }
         : null,
       uptimeMs: this.spawnedAt ? Date.now() - this.spawnedAt : 0,
+      autoselling: this.isAutoselling(),
+      autosellIntervalMs: this.autosellIntervalMs,
     };
   }
 }
