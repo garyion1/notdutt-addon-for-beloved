@@ -43,7 +43,6 @@ public final class KhanhCatalog {
             new Entry("hole_esp", "Hole ESP", null))),
         new Section("ESSENTIALS", "✦", List.of(
             new Entry("creamy_keys", "Creamy Key", null),
-            new Entry("shader_fog", "Custom Sky", null),
             new Entry("custom_glint", "Custom Glint", null),
             new Entry("spotify_hud", "Music Player", "Spotify on your HUD with art, progress and controls"),
             new Entry("media_player", "Media Player", "Whatever is playing on your PC (YouTube, Apple Music...) on your HUD"),

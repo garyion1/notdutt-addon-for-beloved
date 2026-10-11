@@ -75,8 +75,7 @@ public final class IntroOverlay {
             startAt = System.nanoTime();
             if (KhanhFeatures.bool("intro", "sound", true)) {
                 client.getSoundManager().play(PositionedSoundInstance.ui(
-                    SoundEvent.of(Identifier.of(KhanhClient.MOD_ID, "intro_theme")), 1.0F,
-                    (float) KhanhFeatures.decimal("intro", "music_volume", 0.9)));
+                    SoundEvent.of(Identifier.of(KhanhClient.MOD_ID, "intro_theme")), 1.0F, 1.0F));   // full volume
             }
         }
         float t = (System.nanoTime() - startAt) / 1_000_000_000.0F;
@@ -272,8 +271,7 @@ public final class IntroOverlay {
     /** KHANH CLIENT: letters slam down one after another, then a thin line and the version slide in. */
     private static void drawTitle(DrawContext context, TextRenderer font, float cx, float y, float t, float cover, int accent) {
         Matrix3x2fStack m = context.getMatrices();
-        String title = KhanhFeatures.text("intro", "title", "Khanh Client").strip().toUpperCase(java.util.Locale.ROOT);
-        if (title.isEmpty()) title = "KHANH CLIENT";
+        String title = "KHANH CLIENT";
         float scale = 2.6F, spacing = 2.0F;
         float total = 0.0F;
         for (int i = 0; i < title.length(); i++) total += font.getWidth(KhanhClickGuiScreen.fontText(String.valueOf(title.charAt(i)))) * scale + spacing;

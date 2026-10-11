@@ -272,6 +272,7 @@ public final class KhanhColumnsScreen extends Screen implements KhanhClickGui {
     /** Settings shown per module: the client modules only show what Khanh actually uses. */
     private static final Map<String, Set<String>> ONLY = Map.of(
         "visuals", Set.of("finder_seconds", "finder_sound", "blur"),
+        "intro", Set.of("sound"),
         "hud", Set.of("watermark", "modules", "fps", "coords", "armor", "keystrokes", "compass", "radar_range", "radar_mobs", "hud_scale"));
 
     private static List<ModuleOption> options(Module module) {
