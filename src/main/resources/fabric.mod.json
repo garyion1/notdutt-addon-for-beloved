@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "tpa-tools",
+  "version": "${version}",
+  "name": "TPA Tools",
+  "description": "TPA Tools with Spawner Noti integrated, a redesigned history GUI and movable HUD elements.",
+  "authors": [
+    "notdutt"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "meteor": [
+      "me.tpaburst.TPABurstAddon"
+    ]
+  },
+  "custom": {
+    "meteor-client:color": "225,25,25",
+    "modmenu": {
+      "parent": {
+        "id": "meteor-client"
+      }
+    }
+  },
+  "depends": {
+    "java": ">=21",
+    "minecraft": ["${mc_version}"],
+    "meteor-client": "*"
+  }
+}
