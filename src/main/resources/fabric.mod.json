@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "khanh",
+  "version": "${version}",
+  "name": "Khanh Client",
+  "description": "Khanh Client is a liquid-glass visual and exploration client for Fabric 1.21.11.",
+  "authors": [
+    "Khanh Client"
+  ],
+  "license": "All-Rights-Reserved",
+  "icon": "assets/khanh/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.khanh.KhanhClient"
+    ]
+  },
+  "mixins": [
+    "khanh.mixins.json",
+    "khanh.sodium.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.2",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

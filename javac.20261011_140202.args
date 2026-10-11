@@ -1,0 +1,9 @@
+-proc:none
+-d
+/tmp/claude-0/-home-user-notdutt-addon-for-beloved/e27462d9-e373-543a-b951-56a1303d7bf1/scratchpad/jc
+-sourcepath
+src/client/java
+src/client/java/dev/khanh/gui/KhanhColumnsScreen.java
+src/client/java/dev/khanh/gui/KhanhHudEditorScreen.java
+src/client/java/dev/khanh/feature/KhanhHud.java
+src/client/java/dev/khanh/mixin/ChatScreenMixin.java

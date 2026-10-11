@@ -1,0 +1,87 @@
+{
+  "ui_hover": {
+    "sounds": [
+      {
+        "name": "khanh:ui_hover"
+      }
+    ]
+  },
+  "ui_back": {
+    "sounds": [
+      {
+        "name": "khanh:ui_back"
+      }
+    ]
+  },
+  "ui_select": {
+    "sounds": [
+      {
+        "name": "khanh:ui_select"
+      }
+    ]
+  },
+  "ui_open": {
+    "sounds": [
+      {
+        "name": "khanh:ui_open"
+      }
+    ]
+  },
+  "ui_toggle": {
+    "sounds": [
+      {
+        "name": "khanh:ui_toggle"
+      }
+    ]
+  },
+  "notify": {
+    "sounds": [
+      {
+        "name": "khanh:notify"
+      }
+    ]
+  },
+  "warning": {
+    "sounds": [
+      {
+        "name": "khanh:warning"
+      }
+    ]
+  },
+  "alert": {
+    "sounds": [
+      {
+        "name": "khanh:alert"
+      }
+    ]
+  },
+  "key_creamy": {
+    "sounds": [
+      {
+        "name": "khanh:key_creamy"
+      }
+    ]
+  },
+  "key_soft": {
+    "sounds": [
+      {
+        "name": "khanh:key_soft"
+      }
+    ]
+  },
+  "key_deep": {
+    "sounds": [
+      {
+        "name": "khanh:key_deep"
+      }
+    ]
+  },
+  "intro_theme": {
+    "sounds": [
+      {
+        "name": "khanh:intro_theme",
+        "stream": true
+      }
+    ]
+  }
+}

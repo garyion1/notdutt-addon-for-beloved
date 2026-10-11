@@ -1,0 +1,65 @@
+plugins {
+    id "fabric-loom" version "${loom_version}"
+    id "maven-publish"
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+loom {
+    splitEnvironmentSourceSets()
+
+    // -PkhanhRunDir=run-check lets an automated check run beside a dev client someone is playing.
+    runs {
+        client {
+            runDir = project.findProperty("khanhRunDir") ?: "run"
+        }
+    }
+
+    mods {
+        "khanh" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    // Ship only the fonts Khanh uses: Xuong (menu and HUD, OFL), Inter (OFL) and Russo One.
+    exclude { details ->
+        details.path.startsWith("assets/khanh/font/")
+            && !(details.name in ["russo_one.json", "russo-one-regular.ttf", "inter.json", "inter_small.json", "inter.ttf", "inter-ofl.txt",
+                                  "xuong.json", "xuong_small.json", "xuong-regular.ttf"])
+    }
+    exclude "META-INF/licenses/audiowide/**", "META-INF/licenses/chakra-petch/**",
+        "META-INF/licenses/orbitron/**", "META-INF/licenses/oxanium/**",
+        "META-INF/licenses/rajdhani/**"
+
+    filesMatching("fabric.mod.json") {
+        expand "version": inputs.properties.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+    it.options.encoding = "UTF-8"
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
