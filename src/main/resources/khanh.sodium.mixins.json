@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "package": "dev.khanh.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "dev.khanh.mixin.SodiumMixinPlugin",
+  "client": [],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}
