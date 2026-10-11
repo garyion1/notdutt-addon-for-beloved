@@ -34,7 +34,7 @@ public final class SpawnerNotifierToast implements Toast {
         this.accentColor = Theme.rgb(progressBarRgb);
         this.subtitle = "Spawner " + SpawnerAlerts.depthLabel(y);
         this.coords = x + ", " + y + ", " + z;
-        this.sound = playSound ? PositionedSoundInstance.ui(SoundEvents.BLOCK_NOTE_BLOCK_PLING.value(), 1.0F, 1.0F) : null;
+        this.sound = playSound ? PositionedSoundInstance.master(SoundEvents.BLOCK_NOTE_BLOCK_PLING.value(), 1.0F, 1.0F) : null;
     }
 
     @Override
